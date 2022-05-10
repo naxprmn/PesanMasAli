@@ -10,15 +10,26 @@ class Marker {
     return Positioned(
         top: item.position[0] + model.top,
         left: item.position[1] + model.left,
-        child: InkWell(
-            onHover: ((_) {
-              model.hoverPopup(item);
-            }),
-            onTap: () {
-              BottomSheetCustom().buildBottomBar(context, item);
-            },
-            child: Column(
-              children: [Text(item.name), const Icon(Icons.touch_app_rounded)],
-            )));
+        child: GestureDetector(
+          onLongPress: () {
+            model.hoverPopup(item);
+          },
+          onLongPressEnd: (value) {
+            model.hoverPopup(item);
+          },
+          child: InkWell(
+              onHover: ((_) {
+                model.hoverPopup(item);
+              }),
+              onTap: () {
+                BottomSheetCustom().buildBottomBar(context, item);
+              },
+              child: Column(
+                children: [
+                  Text(item.name),
+                  const Icon(Icons.touch_app_rounded)
+                ],
+              )),
+        ));
   }
 }

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: false,
+      enabled: true,
       builder: (context) => MultiProvider(providers: [
         ChangeNotifierProvider<MarkerModel>(
           create: (_) => MarkerModel(),
