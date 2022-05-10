@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:overflow/model/model.dart';
 
-class PopUpCustom {
+class BottomSheetCustom {
   buildBottomBar(BuildContext context, Ruang item) {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet<void>(
@@ -47,10 +47,8 @@ class PopUpCustom {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: Image.asset('assets/location/null.png'),
-                      ),
-                      Text('Modal BottomSheet'),
+                      Expanded(child: Image.asset('assets/location/null.png')),
+                      const Text('PESAN MASALI'),
                       ElevatedButton(
                         child: const Text('Close BottomSheet'),
                         onPressed: () => Navigator.pop(context),

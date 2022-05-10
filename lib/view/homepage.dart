@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:overflow/provider/view_model.dart';
 import 'package:overflow/view/widget/background_grid.dart';
+import 'package:overflow/view/widget/pop_up.dart';
 import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
@@ -56,35 +57,7 @@ class Map extends StatelessWidget {
                   // ),
                   ...marker,
                   model.ishHover
-                      ? Positioned(
-                          top: model.dy,
-                          left: model.dx,
-                          child: Container(
-                            width: 150,
-                            height: 150,
-                            color: Colors.amber,
-                            child: Column(children: [
-                              Expanded(
-                                child: CircleAvatar(
-                                  maxRadius: 50,
-                                  backgroundImage: AssetImage(
-                                    "assets/person/null.png",
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                model.location,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 14),
-                              ),
-                              Text(
-                                model.name,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 12),
-                              ),
-                            ]),
-                          ),
-                        )
+                      ? PopUpCustom().buildpopup(context)
                       : SizedBox()
                   // Positioned(
                   //   left: 0,
