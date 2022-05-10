@@ -7,8 +7,15 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     DevicePreview(
-      enabled: true,
-      builder: (context) => MyApp(), // Wrap your app
+      enabled: false,
+      builder: (context) => MultiProvider(providers: [
+        ChangeNotifierProvider<MarkerModel>(
+          create: (_) => MarkerModel(),
+        ),
+        // ChangeNotifierProvider<PopUpModel>(
+        //   create: (_) => PopUpModel(),
+        // ),
+      ], child: MyApp()), // Wrap your app
     ),
   );
 }
@@ -19,22 +26,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<MarkerModel>(
-          create: (context) => MarkerModel(),
-        )
-      ],
-      child: MaterialApp(
-        title: 'PESAN MAS ALI',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
-        home: const MyHomePage(),
+    return MaterialApp(
+      title: 'PESAN MAS ALI',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      home: const MyHomePage(),
     );
   }
 }
