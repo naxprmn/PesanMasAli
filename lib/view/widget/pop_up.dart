@@ -21,7 +21,7 @@ class PopUpCustom {
           child: Column(children: [
             Expanded(
               child: Row(children: [
-                CircleAvatar(
+                const CircleAvatar(
                   maxRadius: 50,
                   backgroundImage: AssetImage(
                     "assets/person/null.png",
@@ -40,18 +40,18 @@ class PopUpCustom {
                 ))
               ]),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               model.location,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
             Text(
               model.name,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 12),
+              style: const TextStyle(fontSize: 12),
             ),
           ]),
         ),

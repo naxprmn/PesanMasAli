@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_final_fields, prefer_typing_uninitialized_variables
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:overflow/model/model.dart';
 import 'package:overflow/view/shared/global.dart';
@@ -35,7 +38,9 @@ class MarkerModel extends ChangeNotifier {
 
   _addMarker() {
     _marker.clear();
-    print('MAXWIDTH PROVIDER ${_constrain * (_ratio)}');
+    if (kDebugMode) {
+      print('MAXWIDTH PROVIDER ${_constrain * (_ratio)}');
+    }
     for (var item in ruang) {
       _marker.add(Marker().build(context, item));
     }
@@ -78,29 +83,3 @@ class MarkerModel extends ChangeNotifier {
     notifyListeners();
   }
 }
-
-// class PopUpModel extends ChangeNotifier {
-//   bool _isPopUpClicked = false;
-//   var _context;
-//   double _dx = 0.0;
-//   double _dy = 0.0;
-
-//   bool get isPopUpClicked => _isPopUpClicked;
-//   get context => _context;
-//   double get dx => _dx;
-//   double get dy => _dy;
-
-//   getContext(context) {
-//     _context = context;
-//   }
-
-//   clickedPopUp(item) {
-//     _dx = item.position[0];
-//     _dy = item.position[1];
-
-//     print("CHLDREN $item.position[0]");
-//     print("CHLDREN $item.position[1]");
-//     _isPopUpClicked = !_isPopUpClicked;
-//     notifyListeners();
-//   }
-// }

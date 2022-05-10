@@ -11,6 +11,7 @@ class BottomSheetCustom {
         ),
         context: context,
         builder: (BuildContext context) {
+          // ignore: sized_box_for_whitespace
           return Container(
               height: size.height / 2,
               width: size.width,
@@ -26,7 +27,7 @@ class BottomSheetCustom {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            CircleAvatar(
+                            const CircleAvatar(
                               maxRadius: 100,
                               backgroundImage:
                                   AssetImage("assets/person/null.png"),
@@ -36,7 +37,7 @@ class BottomSheetCustom {
                               children: [
                                 Text(
                                   item.title,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold),
                                 ),

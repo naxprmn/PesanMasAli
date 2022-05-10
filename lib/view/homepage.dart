@@ -1,8 +1,8 @@
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:overflow/provider/view_model.dart';
-import 'package:overflow/view/widget/background_grid.dart';
 import 'package:overflow/view/widget/pop_up.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,9 @@ class Map extends StatelessWidget {
         // final popUp = Provider.of<PopUpModel>(context);
         model.getConstrained(constraints.maxWidth);
         model.getContext(context);
-        print('MAXWIDTH ASLI ${constraints.maxWidth * (model.ratio)}');
+        if (kDebugMode) {
+          print('MAXWIDTH ASLI ${constraints.maxWidth * (model.ratio)}');
+        }
         List<Widget> marker = model.marker;
         return Container(
           width: constraints.maxWidth,
@@ -58,7 +60,7 @@ class Map extends StatelessWidget {
                   ...marker,
                   model.ishHover
                       ? PopUpCustom().buildpopup(context)
-                      : SizedBox()
+                      : const SizedBox()
                   // Positioned(
                   //   left: 0,
                   //   top: 0,

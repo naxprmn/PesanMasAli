@@ -15,7 +15,7 @@ void main() {
         // ChangeNotifierProvider<PopUpModel>(
         //   create: (_) => PopUpModel(),
         // ),
-      ], child: MyApp()), // Wrap your app
+      ], child: const MyApp()), // Wrap your app
     ),
   );
 }
