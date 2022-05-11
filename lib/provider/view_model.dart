@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_final_fields, prefer_typing_uninitialized_variables
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:overflow/model/model.dart';
 import 'package:overflow/view/shared/global.dart';
@@ -10,7 +9,6 @@ class MarkerModel extends ChangeNotifier {
   double _top = 0;
   double _left = 0;
   double _ratio = 1;
-  double _constrain = 0.0;
   final double _width = 800;
   List<Widget> _marker = [];
   var _context;
@@ -19,36 +17,40 @@ class MarkerModel extends ChangeNotifier {
   double get left => _left;
   double get ratio => _ratio;
   double get width => _width;
-  get context => _context;
 
+  //converting Ruang to Model
   List<Ruang> _ruang = Global.ruang.map((e) => Ruang.fromMap(e)).toList();
-  List<Ruang> get ruang => _ruang;
+  List<Ruang> get _getruang => _ruang;
+
   getContext(context) {
     _context = context;
   }
 
-  getConstrained(double constrained) {
-    _constrain = constrained;
+  //Populating every Marker(Setiap Ruangan) in Map
+  _addMarker() {
+    _marker.clear();
+    for (var item in _getruang) {
+      _marker.add(Marker().build(_context, item));
+    }
   }
 
+  //Displaying Marker after populating it
   List<Widget> get marker {
     _addMarker();
     return _marker;
   }
 
-  _addMarker() {
-    _marker.clear();
-    if (kDebugMode) {
-      print('MAXWIDTH PROVIDER ${_constrain * (_ratio)}');
-    }
-    for (var item in ruang) {
-      _marker.add(Marker().build(context, item));
-    }
-  }
-
+  //Updating MAP for GestureDetector in HomePage
   void handlePanUpdate(DragUpdateDetails details) {
+    _isHover = false;
     _top = _top + details.delta.dy;
     _left = _left + details.delta.dx;
+    notifyListeners();
+  }
+
+  void resetPosition() {
+    _top = 0;
+    _left = 0;
     notifyListeners();
   }
 
@@ -63,23 +65,54 @@ class MarkerModel extends ChangeNotifier {
   }
 
   bool _isHover = false;
-  double _dx = 0.0;
-  double _dy = 0.0;
+  double _hoverdxposition = 0.0;
+  double _hoverdyposition = 0.0;
   String _name = "";
   String _location = "";
+  String _photoPerson = "";
+  String _photoLocation = "";
 
   bool get ishHover => _isHover;
-  double get dx => _dx;
-  double get dy => _dy;
+  double get hoverdxpos => _hoverdxposition;
+  double get hoverdypos => _hoverdyposition;
   String get name => _name;
   String get location => _location;
+  String get photoPerson => _photoPerson;
+  String get photoLocation => _photoLocation;
 
-  hoverPopup(item) {
-    _dy = item.position[0] + top - 150;
-    _dx = item.position[1] + left + 10;
+  //passing data to popup container in homePage
+  hoverPopup(Ruang item) {
+    //item.position[0] = X
+    _hoverdxposition = item.position[0] + left - 150;
+    //item.position[1] = Y
+    _hoverdyposition = item.position[1] + top - 170;
     _name = item.name;
     _location = item.location;
+    _photoPerson = item.photoPerson;
+    _photoLocation = item.photoLocation;
     _isHover = !_isHover;
+    notifyListeners();
+  }
+
+  void closehoverPopup() {
+    _isHover = false;
+    notifyListeners();
+  }
+
+  void openhoverPopup() {
+    _isHover = true;
+    notifyListeners();
+  }
+
+  double _offsetx = 0.0, _offsety = 0.0;
+
+  double get offsetx => _offsetx;
+  double get offsety => _offsety;
+
+  //debug only / display coordinates in X and Y
+  void getOffset(PointerEvent key) {
+    _offsetx = key.position.dx;
+    _offsety = key.position.dy - 50;
     notifyListeners();
   }
 }

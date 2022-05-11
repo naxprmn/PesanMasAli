@@ -8,8 +8,8 @@ class PopUpCustom {
     final model = Provider.of<MarkerModel>(context);
 
     return Positioned(
-      top: model.dy,
-      left: model.dx,
+      top: model.hoverdypos,
+      left: model.hoverdxpos,
       child: Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -21,19 +21,19 @@ class PopUpCustom {
           child: Column(children: [
             Expanded(
               child: Row(children: [
-                const CircleAvatar(
+                CircleAvatar(
                   maxRadius: 50,
                   backgroundImage: AssetImage(
-                    "assets/person/null.png",
+                    model.photoPerson,
                   ),
                 ),
                 Expanded(
                     child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                     image: DecorationImage(
                       image: AssetImage(
-                        "assets/location/null.jpg",
+                        model.photoLocation,
                       ),
                     ),
                   ),

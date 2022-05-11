@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:overflow/model/model.dart';
 
 class BottomSheetCustom {
   buildBottomBar(BuildContext context, Ruang item) {
     Size size = MediaQuery.of(context).size;
     showModalBottomSheet<void>(
+        isDismissible: false,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50), topRight: Radius.circular(50)),
@@ -22,42 +24,92 @@ class BottomSheetCustom {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Align(
-                        alignment: Alignment.center,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const CircleAvatar(
-                              maxRadius: 100,
-                              backgroundImage:
-                                  AssetImage("assets/person/null.png"),
-                            ),
-                            Expanded(
-                                child: Column(
-                              children: [
-                                Text(
-                                  item.title,
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(item.name),
-                                Text(item.location),
-                              ],
-                            ))
-                          ],
-                        ),
-                      ),
-                      Expanded(child: Image.asset('assets/location/null.png')),
-                      const Text('PESAN MASALI'),
-                      ElevatedButton(
-                        child: const Text('Close BottomSheet'),
-                        onPressed: () => Navigator.pop(context),
-                      )
+                      _buildTitle(item, context),
+                      _buildAvatar(item),
+                      const Divider(),
+                      _buildBody(item),
+                      _buildFooter()
                     ],
                   ),
                 ),
               ));
         });
+  }
+
+  Widget _buildTitle(Ruang item, context) {
+    return Row(children: [
+      Expanded(
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            item.location,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+      IconButton(
+        icon: const Icon(FontAwesomeIcons.xmark),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      )
+    ]);
+  }
+
+  Widget _buildAvatar(Ruang item) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircleAvatar(
+            maxRadius: 50,
+            backgroundImage: AssetImage(item.photoPerson),
+          ),
+          Column(
+            children: [
+              Text(item.name),
+              Text(item.title),
+            ],
+          ),
+        ],
+      ),
+    ]);
+  }
+
+  Widget _buildBody(Ruang item) {
+    List<Widget> pelayanan = [];
+    for (var list in item.pelayanan) {
+      pelayanan.add(Text(list));
+    }
+    return Expanded(
+        child: Center(
+      child: Row(children: [
+        const Spacer(),
+        Image.asset(item.photoLocation),
+        const SizedBox(
+          width: 5,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'JADWAL PELAYANAN : ${item.jadwalPelayanan}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            ...pelayanan
+          ],
+        ),
+        const Spacer(),
+      ]),
+    ));
+  }
+
+  Widget _buildFooter() {
+    return const Text(
+      'Puskesmas Kaliangkrik, Kabupaten Magelang, Jawa Tengah',
+      style: TextStyle(fontStyle: FontStyle.italic),
+    );
   }
 }
