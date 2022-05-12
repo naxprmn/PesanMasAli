@@ -12,11 +12,13 @@ class MarkerModel extends ChangeNotifier {
   final double _width = 800;
   List<Widget> _marker = [];
   var _context;
+  bool _hasTouched = false;
 
   double get top => _top;
   double get left => _left;
   double get ratio => _ratio;
   double get width => _width;
+  bool get hasTouched => _hasTouched;
 
   //converting Ruang to Model
   List<Ruang> _ruang = Global.ruang.map((e) => Ruang.fromMap(e)).toList();
@@ -24,6 +26,11 @@ class MarkerModel extends ChangeNotifier {
 
   getContext(context) {
     _context = context;
+  }
+
+  touched() {
+    _hasTouched = true;
+    notifyListeners();
   }
 
   //Populating every Marker(Setiap Ruangan) in Map

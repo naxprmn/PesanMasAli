@@ -30,7 +30,7 @@ class PopUpCustom {
                 Expanded(
                     child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     image: DecorationImage(
                       image: AssetImage(
                         model.photoLocation,

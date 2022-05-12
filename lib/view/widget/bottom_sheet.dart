@@ -15,7 +15,7 @@ class BottomSheetCustom {
         builder: (BuildContext context) {
           // ignore: sized_box_for_whitespace
           return Container(
-              height: size.height / 2,
+              height: size.height / 1.5,
               width: size.width,
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
@@ -26,8 +26,8 @@ class BottomSheetCustom {
                     children: <Widget>[
                       _buildTitle(item, context),
                       _buildAvatar(item),
-                      const Divider(),
-                      _buildBody(item),
+                      const Divider(height: 1.0),
+                      _buildBody(item, size.width),
                       _buildFooter()
                     ],
                   ),
@@ -58,7 +58,7 @@ class BottomSheetCustom {
 
   Widget _buildAvatar(Ruang item) {
     return Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      Row(
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -77,39 +77,55 @@ class BottomSheetCustom {
     ]);
   }
 
-  Widget _buildBody(Ruang item) {
+  Widget _buildBody(Ruang item, double width) {
     List<Widget> pelayanan = [];
     for (var list in item.pelayanan) {
       pelayanan.add(Text(list));
     }
     return Expanded(
+      child: Container(
+        width: width,
         child: Center(
-      child: Row(children: [
-        const Spacer(),
-        Image.asset(item.photoLocation),
-        const SizedBox(
-          width: 5,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'JADWAL PELAYANAN : ${item.jadwalPelayanan}',
-              style: const TextStyle(fontWeight: FontWeight.bold),
+          child: Row(children: [
+            Image.asset(
+              item.photoLocation,
+              fit: BoxFit.cover,
+              width: width / 2.5,
             ),
-            ...pelayanan
-          ],
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'JADWAL PELAYANAN :',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      item.jadwalPelayanan,
+                    ),
+                    const Text(
+                      'JADWAL LAYANAN :',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    ...pelayanan
+                  ],
+                ),
+              ),
+            ),
+          ]),
         ),
-        const Spacer(),
-      ]),
-    ));
+      ),
+    );
   }
 
   Widget _buildFooter() {
-    return const Text(
-      'Puskesmas Kaliangkrik, Kabupaten Magelang, Jawa Tengah',
-      style: TextStyle(fontStyle: FontStyle.italic),
+    return const FittedBox(
+      child: Text(
+        'Puskesmas Kaliangkrik, Kabupaten Magelang, Jawa Tengah',
+        style: TextStyle(fontStyle: FontStyle.italic, fontSize: 10),
+      ),
     );
   }
 }

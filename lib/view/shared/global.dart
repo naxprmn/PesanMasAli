@@ -113,16 +113,16 @@ abstract class Global {
         "Scalling",
       ]
     },
-    // {
-    //   'location': 'POLI UMUM',
-    //   'name': 'dr. Lingga Sri Muninggar',
-    //   'title': 'DOKTER UMUM',
-    //   'photo': 'assets/person/person1.jpg',
-    //   'locationphoto': 'assets/person/person1.jpg',
-    //   'status': true,
-    //   'position': [-0.012, 0.05],
-    //   'tile': 12,
-    // },
+    {
+      'location': 'POLI UMUM',
+      'name': 'dr. Lingga Sri Muninggar',
+      'title': 'DOKTER UMUM',
+      'photo': 'assets/person/person1.jpg',
+      'locationphoto': 'assets/person/person1.jpg',
+      'status': true,
+      'position': [-0.012, 0.05],
+      'tile': 12,
+    },
     // {
     //   'location': 'APOTEK',
     //   'name': '-',
