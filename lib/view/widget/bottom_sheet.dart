@@ -83,6 +83,7 @@ class BottomSheetCustom {
       pelayanan.add(Text(list));
     }
     return Expanded(
+      // ignore: sized_box_for_whitespace
       child: Container(
         width: width,
         child: Center(

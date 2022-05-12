@@ -71,7 +71,7 @@ class Map extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // _debugCoordinates(model),
+                            // _debugCoordinates(model, constraints.maxWidth),
                           ],
                         ),
                       ),
@@ -86,34 +86,42 @@ class Map extends StatelessWidget {
     );
   }
 
-  Widget _debugCoordinates(model) {
+  // ignore: unused_element
+  Widget _debugCoordinates(model, size) {
     return kDebugMode
-        ? Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-            Row(
-              children: <Widget>[
-                Text(
-                  "X : ${model.offsetx} , ",
-                  textScaleFactor: 3,
+        ? Container(
+            width: size,
+            child: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+              FittedBox(
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "X : ${model.offsetx} , ",
+                      textScaleFactor: 3,
+                    ),
+                    Text(
+                      "Y : ${model.offsety}",
+                      textScaleFactor: 3,
+                    ),
+                  ],
                 ),
-                Text(
-                  "Y : ${model.offsety}",
-                  textScaleFactor: 3,
+              ),
+              FittedBox(
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      "LEFT : ${model.left} , ",
+                      textScaleFactor: 3,
+                    ),
+                    Text(
+                      "TOP : ${model.top}",
+                      textScaleFactor: 3,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Text(
-                  "LEFT : ${model.left} , ",
-                  textScaleFactor: 3,
-                ),
-                Text(
-                  "TOP : ${model.top}",
-                  textScaleFactor: 3,
-                ),
-              ],
-            ),
-          ])
+              ),
+            ]),
+          )
         : const SizedBox();
   }
 }

@@ -20,9 +20,7 @@ class Marker {
                   model.openhoverPopup();
                   BottomSheetCustom().buildBottomBar(context, item);
                 },
-                child: const Icon(
-                  FontAwesomeIcons.locationDot,
-                  color: Colors.white,
-                ))));
+                child: Icon(FontAwesomeIcons.circle,
+                    color: Colors.white.withOpacity(0.50)))));
   }
 }

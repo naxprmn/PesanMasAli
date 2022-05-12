@@ -1,6 +1,3 @@
-import 'package:provider/provider.dart';
-
-import '../../provider/view_model.dart';
 import '/view/shared/global.dart';
 import 'package:flutter/material.dart';
 
