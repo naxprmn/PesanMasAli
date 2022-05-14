@@ -71,7 +71,7 @@ class Map extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // _debugCoordinates(model, constraints.maxWidth),
+                            _debugCoordinates(model, constraints.maxWidth),
                           ],
                         ),
                       ),

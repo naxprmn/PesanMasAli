@@ -27,7 +27,7 @@ class BottomSheetCustom {
                       _buildTitle(item, context),
                       _buildAvatar(item),
                       const Divider(height: 1.0),
-                      _buildBody(item, size.width),
+                      _buildBody(item, size),
                       _buildFooter()
                     ],
                   ),
@@ -77,7 +77,7 @@ class BottomSheetCustom {
     ]);
   }
 
-  Widget _buildBody(Ruang item, double width) {
+  Widget _buildBody(Ruang item, Size size) {
     List<Widget> pelayanan = [];
     for (var list in item.pelayanan) {
       pelayanan.add(Text(list));
@@ -85,13 +85,14 @@ class BottomSheetCustom {
     return Expanded(
       // ignore: sized_box_for_whitespace
       child: Container(
-        width: width,
+        width: size.width,
         child: Center(
           child: Row(children: [
             Image.asset(
               item.photoLocation,
-              fit: BoxFit.cover,
-              width: width / 2.5,
+              fit: BoxFit.contain,
+              width: size.width / 2.5,
+              height: size.height / 5,
             ),
             Expanded(
               child: SingleChildScrollView(

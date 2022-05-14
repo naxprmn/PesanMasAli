@@ -1,4 +1,4 @@
-import '/view/shared/global.dart';
+import 'package:overflow/view/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class OverlayWidget extends StatelessWidget {
@@ -11,7 +11,7 @@ class OverlayWidget extends StatelessWidget {
     return IgnorePointer(
       ignoring: true,
       child: Container(
-        color: Global.white,
+        color: ThemeColors.white,
         child: Stack(children: [
           Stack(children: [
             Align(
@@ -24,7 +24,7 @@ class OverlayWidget extends StatelessWidget {
               ),
             ),
             Container(
-              color: Global.blue.withOpacity(0.5),
+              color: ThemeColors.blue.withOpacity(0.5),
             ),
           ]),
           Center(
